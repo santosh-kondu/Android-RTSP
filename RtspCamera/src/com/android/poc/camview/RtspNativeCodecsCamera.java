@@ -1,4 +1,4 @@
-package de.kp.rtspcamera;
+package com.android.poc.camview;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.android.poc.camview.R;
 import de.kp.net.rtp.recorder.RtspVideoRecorder;
 import de.kp.net.rtsp.RtspConstants;
 import de.kp.net.rtsp.server.RtspServer;
@@ -22,7 +23,7 @@ public class RtspNativeCodecsCamera extends Activity {
 	// default RTSP command port is 554
 //	private int SERVER_PORT = 8080;
 
-	private RtspVideoRecorder outgoingPlayer;
+	/*private RtspVideoRecorder outgoingPlayer;
 
 	private SurfaceView mCameraPreview;
 	private SurfaceHolder previewHolder;
@@ -35,7 +36,9 @@ public class RtspNativeCodecsCamera extends Activity {
 	private int mPreviewWidth = Integer.valueOf(RtspConstants.WIDTH);
 	private int mPreviewHeight = Integer.valueOf(RtspConstants.HEIGHT);
 
-	private RtspServer streamer;
+	private RtspServer streamer;*/
+	
+	private RtspCamView camView = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,14 +56,16 @@ public class RtspNativeCodecsCamera extends Activity {
 		/*
 		 * Camera preview initialization
 		 */
-		mCameraPreview = (SurfaceView) findViewById(R.id.smallcameraview);
+		camView = new RtspCamView((SurfaceView) findViewById(R.id.smallcameraview));
+		camView.initStreamCast();
+		/*mCameraPreview = (SurfaceView) findViewById(R.id.smallcameraview);
 		previewHolder = mCameraPreview.getHolder();
 		previewHolder.addCallback(surfaceCallback);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
 //		outgoingPlayer = new RtspVideoRecorder("h263-2000");
 		outgoingPlayer = new RtspVideoRecorder("h264");
-		outgoingPlayer.open();
+		outgoingPlayer.open();*/
 		
 
 	}
@@ -70,9 +75,10 @@ public class RtspNativeCodecsCamera extends Activity {
 		Log.d(TAG, "onResume");
 		
 
+		camView.resumeView();
 		// starts the RTSP Server
 
-		try {
+		/*try {
 
 			// initialize video encoder to be used
 			// for SDP file generation
@@ -91,10 +97,10 @@ public class RtspNativeCodecsCamera extends Activity {
 			e.printStackTrace();
 		}
 
-		/*
-		 * Camera initialization
-		 */
-		camera = Camera.open();
+		
+		 // Camera initialization
+		 
+		camera = Camera.open();*/
 
 		super.onResume();
 
@@ -104,50 +110,58 @@ public class RtspNativeCodecsCamera extends Activity {
 	public void onPause() {
 
 		// stop RTSP server
-		if (streamer != null)
+		/*if (streamer != null)
 			streamer.stop();
-		streamer = null;
+		streamer = null;*/
+		
+		//camView.pauseView();
 
 		super.onPause();
 	}
 
-	/*
-	 * SurfaceHolder callback triple
-	 */
-	SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
-		/*
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+	}
+
+	
+	 // SurfaceHolder callback triple
+	 
+	/*SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
+		
 		 * Created state: - Open camera - initial call to startPreview() - hook
 		 * PreviewCallback() on it, which notifies waiting thread with new
 		 * preview data - start thread
 		 * 
 		 * @see android.view.SurfaceHolder.Callback#surfaceCreated(android.view.
-		 * SurfaceHolder )
-		 */
+		 * SurfaceHolder ) 
+		 
 		public void surfaceCreated(SurfaceHolder holder) {
 			Log.d(TAG, "surfaceCreated");
 
 		}
 
-		/*
-		 * Changed state: - initiate camera preview size, set
+		
+		  Changed state: - initiate camera preview size, set
 		 * camera.setPreviewDisplay(holder) - subsequent call to startPreview()
 		 * 
 		 * @see android.view.SurfaceHolder.Callback#surfaceChanged(android.view.
 		 * SurfaceHolder , int, int, int)
-		 */
+		 
 		public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
 			Log.d(TAG, "surfaceChanged");
 			initializePreview(w, h);
 			startPreview();
 		}
 
-		/*
-		 * Destroy State: Take care on release of camera
+		
+		  Destroy State: Take care on release of camera
 		 * 
 		 * @see
 		 * android.view.SurfaceHolder.Callback#surfaceDestroyed(android.view.
-		 * SurfaceHolder)
-		 */
+		 * SurfaceHolder) 
+		 
 		public void surfaceDestroyed(SurfaceHolder holder) {
 			Log.d(TAG, "surfaceDestroyed");
 
@@ -169,12 +183,14 @@ public class RtspNativeCodecsCamera extends Activity {
 	};
 
 
-	/**
+	
+	*//**
 	 * This method checks availability of camera and preview
 	 * 
 	 * @param width
 	 * @param height
-	 */
+	 *//*
+	
 	private void initializePreview(int width, int height) {
 		Log.d(TAG, "initializePreview");
 
@@ -221,6 +237,6 @@ public class RtspNativeCodecsCamera extends Activity {
 	
 	public boolean isReady() {
 		return this.inPreview;
-	}
+	}*/
 
 }

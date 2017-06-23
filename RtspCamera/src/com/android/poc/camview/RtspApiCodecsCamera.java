@@ -1,4 +1,4 @@
-package de.kp.rtspcamera;
+package com.android.poc.camview;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
+import com.android.poc.camview.R;
 import de.kp.net.rtp.RtpSender;
 import de.kp.net.rtp.packetizer.AbstractPacketizer;
 import de.kp.net.rtp.packetizer.H263Packetizer;

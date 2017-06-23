@@ -1,4 +1,4 @@
-package de.kp.rtspcamera;
+package com.android.poc.camview;
 
 public class MediaConstants {
 
