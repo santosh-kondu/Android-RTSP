@@ -28,7 +28,7 @@ public class RtspApiCodecsCamera extends Activity {
 	private String TAG = "RTSPCamera";
 
 	// default RTSP command port is 554
-	private int SERVER_PORT = 8080;
+	private int SERVER_PORT = 9000;
 
 	private SurfaceView mVideoPreview;
 	private SurfaceHolder mSurfaceHolder;

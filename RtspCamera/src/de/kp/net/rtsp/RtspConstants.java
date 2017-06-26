@@ -72,13 +72,13 @@ public class RtspConstants {
     public static final int CLIENT_VIDEO_PORT = 4000;
 
 //	public static String SERVER_IP = "spexhd2:8080";
-    public static int SERVER_PORT = 8080;
+    public static int SERVER_PORT = 9000;
     public static String SERVER_IP = getLocalIpAddress() + ":" + SERVER_PORT;
     		
 	public static String SERVER_NAME    = "KuP RTSP Server";
     public static String SERVER_VERSION = "0.1";
     
-    public static int PORT_BASE = 3000;
+    public static int PORT_BASE = 9100;
     public static int[] PORTS_RTSP_RTP = {PORT_BASE, (PORT_BASE + 1)};
     
 	public static final String DIR_MULTIMEDIA = "../";

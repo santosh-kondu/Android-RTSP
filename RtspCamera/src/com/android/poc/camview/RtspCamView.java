@@ -1,14 +1,17 @@
 package com.android.poc.camview;
 
 import java.io.IOException;
+import java.util.List;
 
 import de.kp.net.rtp.recorder.RtspVideoRecorder;
 import de.kp.net.rtsp.RtspConstants;
 import de.kp.net.rtsp.server.RtspServer;
+import android.annotation.SuppressLint;
 import android.hardware.Camera;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class RtspCamView {
 	private String TAG = "RTSPNativeCamera";
@@ -32,6 +35,7 @@ public class RtspCamView {
 	
 	public void initStreamCast()
 	{
+		mCameraPreview.setVisibility(View.VISIBLE);
 		previewHolder = mCameraPreview.getHolder();
 		previewHolder.addCallback(surfaceCallback);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -41,6 +45,12 @@ public class RtspCamView {
 		outgoingPlayer.open();
 	}
 	
+	public void setVisibility(int visibility)
+	{
+		mCameraPreview.setVisibility(visibility);
+	}
+	
+	@SuppressLint("NewApi")
 	public void resumeView()
 	{
 		// starts the RTSP Server
@@ -71,7 +81,8 @@ public class RtspCamView {
 		 */
 		if(camera == null)
 		{
-			camera = Camera.open();
+			camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+			camera.setDisplayOrientation(90);
 		}
 	}
 	
@@ -81,6 +92,9 @@ public class RtspCamView {
 				if (streamer != null)
 					streamer.stop();
 				streamer = null;
+				
+				camera.release();
+				//camera = null;
 	}
 	
 	
@@ -163,7 +177,12 @@ public class RtspCamView {
 
 				Camera.Parameters parameters = camera.getParameters();
 				parameters.setPreviewSize(mPreviewWidth, mPreviewHeight);
-
+				
+				List<Camera.Size> supportedSizes = parameters.getSupportedPreviewSizes();
+		        Camera.Size procSize_ = supportedSizes.get( supportedSizes.size()/2);
+		       // parameters.setPreviewSize(procSize_.width, procSize_.height);
+		        //RtspConstants.WIDTH = String.valueOf(procSize_.width);
+		        //RtspConstants.HEIGHT = String.valueOf(procSize_.height);
 				camera.setParameters(parameters);
 				cameraConfigured = true;
 
