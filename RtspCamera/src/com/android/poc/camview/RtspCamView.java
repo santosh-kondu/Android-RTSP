@@ -93,7 +93,7 @@ public class RtspCamView {
 					streamer.stop();
 				streamer = null;
 				
-				camera.release();
+				//camera.release();
 				//camera = null;
 	}
 	

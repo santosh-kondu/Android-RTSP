@@ -46,10 +46,10 @@ public class RtspNativeCodecsCamera extends Activity {
 
 		Log.d(TAG, "onCreate");
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		Window win = getWindow();
-		win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		win.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//Window win = getWindow();
+		//win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		//win.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.cameranativecodecs);
 
